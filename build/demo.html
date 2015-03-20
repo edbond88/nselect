@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>nSelect - custom select jQuery plugin</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=cyrillic,latin' rel='stylesheet' type='text/css'>    <link rel="stylesheet" href="//highlightjs.org/static/demo/styles/monokai.css">
+    <link rel="stylesheet" href="demo.css">
+
+    <link rel="stylesheet" href="jquery.nselect.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <h1><span>nSelect</span> - jQuery custom select plugin</h1>
+
+        <section class="select__one">
+            <label>Простой вариант плагина. Если заголовок не задан явно, то берется первый элемент в селекте:</label>
+            <p>
+                <select class="nselect-1" name="pets">
+                    <option value="1" selected>Cat</option>
+                    <option value="2">Dog</option>
+                    <option value="3">Frog</option>
+                    <option value="4">Duck</option>
+                    <option value="5">Elephant</option>
+                </select>
+            </p>            
+
+<pre><code>&lt;select&nbsp;class=&quot;nselect-1&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
+<pre><code>$('.nselect-1').niceSelect();</code></pre>
+
+        </section>
+
+        <section class="select__one">
+            <label>Селект, который нельзя раскрыть. Добавляем класс _disabled и data-title="Disabled":</label>
+            <p>
+                <select class="nselect-1 _disabled" name="disabled" data-title="Disabled">
+                    <option value="1">Cat</option>
+                    <option value="2">Dog</option>
+                    <option value="3">Frog</option>
+                    <option value="4">Duck</option>
+                    <option value="5">Elephant</option>
+                </select>
+            </p>
+
+<pre><code>&lt;select&nbsp;class=&quot;nselect-1&nbsp;_disabled&quot;&nbsp;name=&quot;disabled&quot;&nbsp;data-title=&quot;Disabled&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
+
+        </section>
+        
+        <section class="select__one">
+            <label>Вариант, когда заголовок задается черезе data-title. После выбора эта надпись исчезает:</label>
+            <p>
+                <select class="nselect-2" name="pets" data-title="Chose your pet">
+                    <option value="1">Cat</option>
+                    <option value="2">Dog</option>
+                    <option value="3">Frog</option>
+                    <option value="4">Duck</option>
+                    <option value="5">Elephant</option>
+                </select>
+            </p>
+
+<pre><code>&lt;select&nbsp;class=&quot;nselect-2&quot;&nbsp;name=&quot;pets&quot;&nbsp;data-title=&quot;Chose&nbsp;your&nbsp;pet&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
+<pre><code>$('.nselect-2').niceSelect();</code></pre>
+
+        </section>
+        
+        <section class="select__one">
+            <label>Список выпадает вверх:</label>
+            <p>
+                <select class="nselect-3" name="pets">
+                    <option value="1">Cat</option>
+                    <option value="2">Dog</option>
+                    <option value="3">Frog</option>
+                    <option value="4">Duck</option>
+                    <option value="5" selected>Elephant</option>
+                </select>
+            </p>
+
+<pre><code>&lt;select&nbsp;class=&quot;nselect-3&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&nbsp;selected&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
+
+<pre><code>$('.nselect-3').niceSelect({
+    topList : true
+});</code></pre>
+
+        </section>
+
+        <section class="select__one">
+            <label>Событие при открытии и выборе пункта:</label>
+            <p>
+                <select class="nselect-4" name="pets">
+                    <option value="1">Cat</option>
+                    <option value="2">Dog</option>
+                    <option value="3">Frog</option>
+                    <option value="4">Duck</option>
+                    <option value="5">Elephant</option>
+                </select>
+            </p>
+
+<pre><code>$('.nselect-4').niceSelect({
+    afterOpen : function(el){
+        alert('Селект открылся')
+    },
+    afterChange : function(el){
+        alert('Пункт выбран')
+    }
+});</code></pre>
+
+        </section>
+
+        <section class="select__one">
+            <label>Заголовок задан в скрипте:</label>
+            <p>
+                <select class="nselect-5" name="pets">
+                    <option value="1">Cat</option>
+                    <option value="2">Dog</option>
+                    <option value="3">Frog</option>
+                    <option value="4">Duck</option>
+                    <option value="5">Elephant</option>
+                </select>
+            </p>
+
+<pre><code>$('.nselect-5').niceSelect({
+    firstTitle : 'JS first title'
+});</code></pre>
+        </section>
+
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+
+    <script src="jquery.nselect.js"></script>
+    <script>
+
+        hljs.initHighlightingOnLoad();
+
+        $('.nselect-1').niceSelect();
+
+        
+        $('.nselect-2').niceSelect();
+
+        $('.nselect-3').niceSelect({
+            topList : true
+        });
+
+        $('.nselect-4').niceSelect({
+            afterOpen : function(el){
+                alert('Селект открылся')
+            },
+            afterChange : function(el){
+                alert('Пункт выбран')
+            }
+        });
+
+        $('.nselect-5').niceSelect({
+            firstTitle : 'JS first title'
+        });
+
+    </script>
+</body>
+</html>

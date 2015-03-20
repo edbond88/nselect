@@ -1,0 +1,137 @@
+.nice-select {
+  color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px; }
+  .nice-select:after {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    display: none; }
+  .nice-select._active .nice-select-head {
+    border-color: transparent; }
+    .nice-select._active .nice-select-head:after {
+      -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+              transform: rotate(180deg); }
+  .nice-select._active .nice-select__inner {
+    display: block; }
+  .nice-select._top .nice-select__inner {
+    top: inherit;
+    bottom: 40px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); }
+    .nice-select._top .nice-select__inner:before {
+      top: inherit;
+      bottom: -6px;
+      border-width: 6px 6px 0 6px;
+      border-color: #ffffff transparent transparent transparent; }
+  .nice-select._disabled:after {
+    display: block; }
+  .nice-select._disabled .nice-select-head {
+    cursor: default;
+    color: #909090;
+    background: #E6E6E6; }
+    .nice-select._disabled .nice-select-head:after {
+      border-color: #909090 transparent transparent transparent; }
+    .nice-select._disabled .nice-select-head:before {
+      opacity: 0; }
+      HTML.lt-ie9 .nice-select._disabled .nice-select-head:before {
+        display: none; }
+  .nice-select._checked .nice-select-head {
+    background: #f2a621;
+    color: #fff; }
+    .nice-select._checked .nice-select-head:after {
+      border-color: #fff transparent transparent transparent; }
+  .nice-select .nice-select-head {
+    font-size: 14px;
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    background: #AFCEFF;
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 7px 24px 7px 11px;
+    overflow: hidden;
+    color: #000;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-transition: width .3s;
+            transition: width .3s; }
+    .nice-select .nice-select-head:after {
+      right: 10px;
+      top: 14px;
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 4px 3px 0 3px;
+      border-color: #000 transparent transparent transparent; }
+    .nice-select .nice-select-head SPAN {
+      display: block;
+      overflow: hidden; }
+      .nice-select .nice-select-head SPAN B {
+        font-weight: normal; }
+  .nice-select .nice-select__inner {
+    position: absolute;
+    text-align: left;
+    top: 45px;
+    left: 0;
+    z-index: 15;
+    width: 190px;
+    max-height: 330px;
+    box-sizing: border-box;
+    background: #fff;
+    margin: 0;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.2);
+    display: none;
+    border-radius: 3px; }
+    HTML.lt-ie9 .nice-select .nice-select__inner {
+      border: 1px solid #ccc; }
+    .nice-select .nice-select__inner:before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      margin-left: 15px;
+      width: 0px;
+      height: 0px;
+      border-style: solid;
+      border-width: 0 6px 6px 6px;
+      border-color: transparent transparent #ffffff transparent; }
+  .nice-select .nice-select-list {
+    max-height: 280px;
+    overflow: hidden;
+    margin: 0;
+    padding: 10px 0; }
+    .nice-select .nice-select-list LI {
+      padding: 0;
+      margin: 0;
+      list-style: none; }
+      .nice-select .nice-select-list LI:before {
+        display: none; }
+      .nice-select .nice-select-list LI._active {
+        display: none; }
+        .nice-select .nice-select-list LI._active SPAN {
+          color: blue; }
+      .nice-select .nice-select-list LI._visible {
+        display: block; }
+      .nice-select .nice-select-list LI:last-child SPAN {
+        border-color: transparent; }
+      .nice-select .nice-select-list LI SPAN {
+        padding: 7px 20px;
+        display: block;
+        cursor: pointer;
+        color: #000;
+        border-bottom: 1px solid #f4f4f4; }
+        .nice-select .nice-select-list LI SPAN:hover {
+          color: #fff;
+          background: #54b0de; }

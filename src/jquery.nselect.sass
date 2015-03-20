@@ -1,0 +1,171 @@
+// Выпадающий список в селекте
+.nice-select
+    color: #fff
+    position: relative
+    box-sizing: border-box
+    display: inline-block 
+    vertical-align: middle 
+    font-size: 14px 
+    
+    &:after
+        width: 100%
+        height: 100%
+        position: absolute
+        content: ''
+        left: 0
+        top: 0
+        display: none      
+     
+    &._active
+        .nice-select-head
+            border-color: transparent  
+            
+            HTML.no-csstransforms &:after
+                // +ps(pin-up)
+                
+            &:after
+                transform: rotate(180deg)
+            
+        .nice-select__inner
+            display: block
+
+    
+    &._top
+        .nice-select__inner
+            top: inherit
+            bottom: 40px
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2)
+            
+            &:before
+                top: inherit
+                bottom: -6px
+                border-width: 6px 6px 0 6px
+                border-color: #ffffff transparent transparent transparent
+
+    &._disabled
+        &:after
+            display: block
+             
+        .nice-select-head
+            cursor: default
+            color: #909090 
+            background: #E6E6E6 
+            
+            &:after
+                border-color: #909090 transparent transparent transparent
+
+            &:before
+                opacity: 0 
+                
+                HTML.lt-ie9 &
+                    display: none
+
+    &._checked
+        .nice-select-head
+            background: #f2a621
+            color: #fff
+            
+            &:after
+                border-color: #fff transparent transparent transparent
+
+    .nice-select-head
+        font-size: 14px 
+        margin: 0 
+        font-weight: normal 
+        cursor: pointer
+        position: relative
+        display: inline-block 
+        background: #AFCEFF
+        border-radius: 2px
+        box-sizing: border-box 
+        padding: 7px 24px 7px 11px
+        overflow: hidden 
+        color: #000
+        user-select: none
+        transition: width .3s
+        
+        &:after
+            right: 10px
+            top: 14px
+            content: ''
+            position: absolute
+            width: 0
+            height: 0
+            border-style: solid
+            border-width: 4px 3px 0 3px
+            border-color: #000 transparent transparent transparent
+        
+        SPAN
+            display: block
+            overflow: hidden 
+            
+            B
+                font-weight: normal
+            
+    .nice-select__inner
+        position: absolute 
+        text-align: left 
+        top: 45px
+        left: 0
+        z-index: 15  
+        width: 190px
+        max-height: 330px
+        box-sizing: border-box  
+        background: #fff
+        margin: 0
+        box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.2)
+        display: none
+        border-radius: 3px 
+        
+        HTML.lt-ie9 &
+            border: 1px solid #ccc
+        
+        &:before
+            content: ''
+            position: absolute
+            top: -6px
+            margin-left: 15px
+            width: 0px
+            height: 0px
+            border-style: solid
+            border-width: 0 6px 6px 6px
+            border-color: transparent transparent #ffffff transparent
+        
+    .nice-select-list
+        max-height: 280px
+        overflow: hidden
+        margin: 0 
+        padding: 10px 0
+        
+        LI
+            padding: 0 
+            margin: 0 
+            list-style: none
+            
+            &:before
+                display: none 
+
+            &._active
+                display: none 
+                
+                SPAN
+                    color: blue
+                             
+            &._visible
+                display: block  
+            
+            &:last-child
+                SPAN
+                    border-color: transparent 
+
+            SPAN
+                padding: 7px 20px
+                display: block  
+                cursor: pointer
+                color: #000
+                border-bottom: 1px solid #f4f4f4
+                
+                &:hover
+                    color: #fff
+                    background: #54b0de 
+                    
