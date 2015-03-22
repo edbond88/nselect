@@ -9,37 +9,20 @@ License: MIT License (MIT)
 
 /*
 Copyright 2015 Ed Bond (email: edbond88@gmail.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
 */
 (function ($) {
     $.nSelect = function($element, opt) {
         var $this = this,
             customScrollFlag = false,
             defaults = {
-                topList        : false,
-                firstTitle     : '',
-                theme          : 'nsOrange',
-                disabled       : false,
-                scrollbarTheme : 'dark',
-                afterChange    : function() {},
-                afterOpen      : function() {}
+                topList         : false,
+                firstTitle      : '',
+                theme           : 'nsOrange',
+                disabled        : false,
+                scrollbarTheme  : 'dark',
+                hideAfterSelect : false,
+                afterChange     : function() {},
+                afterOpen       : function() {}
             },
             options = $.extend(defaults, opt);
 
@@ -125,18 +108,25 @@ THE SOFTWARE.
                     val = $that.val(),
                     html = $that.html(),
                     activeClass = '',
+                    hideClass = '',
                     newItem;
 
                 // Если есть selected то добавляем активный класс к li
                 // и записываем этот опшин в переменную для дальнейших действий
                 if ($that.attr('selected')) {
                     selectedOpt = $that;
-                    activeClass = 'class="_active"';
+                    activeClass = '_active';
+
+                    if (options.hideAfterSelect == true) {
+                        hideClass = '_hide';
+                    }
                 } else {
                     activeClass = '';
+                    hideClass = ''
                 }
 
-                newItem = '<li '+activeClass+' data-val="'+val+'"><span>'+html+'</span></li>';
+
+                newItem = '<li class="'+activeClass+' '+hideClass+'" data-val="'+val+'"><span>'+html+'</span></li>';
 
                 el.selectList.append(newItem)
             });
@@ -149,6 +139,9 @@ THE SOFTWARE.
                 noSelected = true;
                 selectedOpt = $elem.find('option');
                 el.selectItem.eq(0).addClass('_active');
+                if (options.hideAfterSelect == true) {
+                    el.selectItem.eq(0).addClass('_hide');
+                }
             }
 
             // Делаем кнопку с выбранным элементом из списка
@@ -210,6 +203,10 @@ THE SOFTWARE.
                 newVal = $that.data('val');
 
             $that.addClass('_active').siblings('li').removeClass('_active');
+
+            if (options.hideAfterSelect == true) {
+                $that.addClass('_hide').siblings('li').removeClass('_hide');
+            }
             
             ctx.addClass('_checked');
 

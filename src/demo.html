@@ -35,7 +35,7 @@
             <h5>Основные возможности:</h5>
             <ul>
                 <li>Простота в установке</li>
-                <li>Возможность выхова коллбэков</li>
+                <li>Возможность вызова коллбэков</li>
                 <li>Простая кастомизация тем</li>
                 <li>Работает в формах</li>
                 <li>Поддержка скролла для длинных списков (нужен дополнительный плагин)</li>
@@ -46,6 +46,7 @@
         <section>
             <h3>Установка</h3>
             <p>Для начала нужно <a href="https://github.com/edbond88/nselect/archive/master.zip" target="_blank">скачать архив</a> с плагином, из папки <code>build</code> взять файлы <code>jquery.nselect.min.js</code>, <code>jquery.nselect.css</code> и подключить к вашему проекту.</p>
+            <p>Если вы используете SASS, то рекомендую брать файл <code>jquery.nselect.sass</code>из папки <code>src</code></p>
 
             <h4>HTML</h4>
             <p>Файл со стилями подключается в <code>head</code> тэг:</p>
@@ -96,6 +97,10 @@
                     <tr>
                         <td><code>disabled:&nbsp;false</code></td>
                         <td>Если <code>true</code>, то список становится некликабельным. Добавляется класс <code>_disabled</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hideAfterSelect:&nbsp;false</code></td>
+                        <td>Если <code>true</code>, то при выборе элемента, он будет исчезать из списка. Добавляется класс <code>_hide</code></td>
                     </tr>
                     <tr>
                         <td><code>scrollbarTheme: 'dark'</code></td>
@@ -416,6 +421,7 @@
                 <li role="presentation" class="active"><a href="#ex1" aria-controls="ex1" role="tab" data-toggle="tab">Пример 1</a></li>
                 <li role="presentation"><a href="#ex2" aria-controls="ex2" role="tab" data-toggle="tab">Пример 2</a></li>
                 <li role="presentation"><a href="#ex3" aria-controls="ex3" role="tab" data-toggle="tab">Пример 3</a></li>
+                <li role="presentation"><a href="#ex4" aria-controls="ex4" role="tab" data-toggle="tab">Пример 4</a></li>
             </ul>   
 
             <div class="tab-content">
@@ -465,11 +471,26 @@
 
                     <pre><code>&lt;select&nbsp;class=&quot;nselect-4&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-4').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterOpen&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x0421;&#x0435;&#x043b;&#x0435;&#x043a;&#x0442;&nbsp;&#x043e;&#x0442;&#x043a;&#x0440;&#x044b;&#x043b;&#x0441;&#x044f;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;},<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterChange&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x041f;&#x0443;&#x043d;&#x043a;&#x0442;&nbsp;&#x0432;&#x044b;&#x0431;&#x0440;&#x0430;&#x043d;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>});</code></pre>
                 </div>
+
+                <div role="tabpanel" class="tab-pane" id="ex4">
+                    <label>Опция <code>hideAfterSelect = true</code>:</label>
+                    <p>
+                        <select class="nselect-5" name="pets">
+                            <option value="1">Cat</option>
+                            <option value="2">Dog</option>
+                            <option value="3">Frog</option>
+                            <option value="4">Duck</option>
+                            <option value="5" selected>Elephant</option>
+                        </select>
+                    </p>
+
+                    <pre><code>&lt;select&nbsp;class=&quot;nselect-4&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-4').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterOpen&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x0421;&#x0435;&#x043b;&#x0435;&#x043a;&#x0442;&nbsp;&#x043e;&#x0442;&#x043a;&#x0440;&#x044b;&#x043b;&#x0441;&#x044f;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;},<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterChange&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x041f;&#x0443;&#x043d;&#x043a;&#x0442;&nbsp;&#x0432;&#x044b;&#x0431;&#x0440;&#x0430;&#x043d;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>});</code></pre>
+                </div>
             </div>  
         </section>   
 
         <section>
-            <h3>Требование и поддержка</h3>
+            <h3>Требования и поддержка</h3>
             <p>Для работы плагина нужна библиотека jQuery версии выше 1.6</p>
             <p>Поддержка браузерами:</p>
             <ul>
@@ -521,6 +542,10 @@
             afterChange : function(el){
                 alert('Пункт выбран')
             }
+        });
+
+        $('.nselect-5').nSelect({
+            hideAfterSelect : true
         });
 
     </script>

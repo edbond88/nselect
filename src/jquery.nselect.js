@@ -1,15 +1,28 @@
+/*
+== nSelect jQuery custom select plugin == 
+Version: 1.0.0
+Plugin URI: http://nselect.edbond.name/
+Author: Ed Bond
+Author URI: http://edbond.name/
+License: MIT License (MIT)
+*/
+
+/*
+Copyright 2015 Ed Bond (email: edbond88@gmail.com)
+*/
 (function ($) {
     $.nSelect = function($element, opt) {
         var $this = this,
             customScrollFlag = false,
             defaults = {
-                topList        : false,
-                firstTitle     : '',
-                theme          : 'nsOrange',
-                disabled       : false,
-                scrollbarTheme : 'dark',
-                afterChange    : function() {},
-                afterOpen      : function() {}
+                topList         : false,
+                firstTitle      : '',
+                theme           : 'nsOrange',
+                disabled        : false,
+                scrollbarTheme  : 'dark',
+                hideAfterSelect : false,
+                afterChange     : function() {},
+                afterOpen       : function() {}
             },
             options = $.extend(defaults, opt);
 
@@ -95,18 +108,25 @@
                     val = $that.val(),
                     html = $that.html(),
                     activeClass = '',
+                    hideClass = '',
                     newItem;
 
                 // Если есть selected то добавляем активный класс к li
                 // и записываем этот опшин в переменную для дальнейших действий
                 if ($that.attr('selected')) {
                     selectedOpt = $that;
-                    activeClass = 'class="_active"';
+                    activeClass = '_active';
+
+                    if (options.hideAfterSelect == true) {
+                        hideClass = '_hide';
+                    }
                 } else {
                     activeClass = '';
+                    hideClass = ''
                 }
 
-                newItem = '<li '+activeClass+' data-val="'+val+'"><span>'+html+'</span></li>';
+
+                newItem = '<li class="'+activeClass+' '+hideClass+'" data-val="'+val+'"><span>'+html+'</span></li>';
 
                 el.selectList.append(newItem)
             });
@@ -119,6 +139,9 @@
                 noSelected = true;
                 selectedOpt = $elem.find('option');
                 el.selectItem.eq(0).addClass('_active');
+                if (options.hideAfterSelect == true) {
+                    el.selectItem.eq(0).addClass('_hide');
+                }
             }
 
             // Делаем кнопку с выбранным элементом из списка
@@ -180,6 +203,10 @@
                 newVal = $that.data('val');
 
             $that.addClass('_active').siblings('li').removeClass('_active');
+
+            if (options.hideAfterSelect == true) {
+                $that.addClass('_hide').siblings('li').removeClass('_hide');
+            }
             
             ctx.addClass('_checked');
 

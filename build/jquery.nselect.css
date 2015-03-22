@@ -56,7 +56,7 @@
       padding: 0;
       margin: 0;
       list-style: none; }
-      .nselect .nselect__list LI._active {
+      .nselect .nselect__list LI._hide {
         display: none; }
       .nselect .nselect__list LI SPAN {
         display: block;
@@ -154,10 +154,8 @@
       padding: 0;
       margin: 0;
       list-style: none; }
-      .nselect.nsOrange .nselect__list LI._active {
-        display: none; }
-        .nselect.nsOrange .nselect__list LI._active SPAN {
-          color: blue; }
+      .nselect.nsOrange .nselect__list LI._active SPAN {
+        color: #f2a621; }
       .nselect.nsOrange .nselect__list LI:last-child SPAN {
         border-color: transparent; }
       .nselect.nsOrange .nselect__list LI SPAN {

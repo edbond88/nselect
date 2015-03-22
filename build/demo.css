@@ -19,6 +19,9 @@ BODY {
   width: 100%;
   padding: 30px 20px;
   position: relative; }
+  @media screen and (min-width: 1287px) {
+    .header {
+      background-size: cover; } }
   .header H1 {
     text-align: center;
     font-weight: 300;
