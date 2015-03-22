@@ -1,0 +1,16 @@
+/* TEAM */
+  Developer: Ed Bond
+  Contact: edbond88 [at] gmail.com
+  Twitter: @edbond88
+  From: Kiev, Ukraine
+
+/* THANKS */
+  Free font "Roboto": Christian Robertson
+  Google+: goo.gl/XxlRb 
+
+/* SITE */
+  Last update: 2015/03
+  Language: Russian / English
+  Doctype: HTML5
+  IDE: Sublime Text 3, Photoshop
+  Technology: HTML5, CSS3, jQuery, Twitter Bootstrap, highlightjs

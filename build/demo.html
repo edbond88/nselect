@@ -2,158 +2,525 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>nSelect - custom select jQuery plugin</title>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=cyrillic,latin' rel='stylesheet' type='text/css'>    <link rel="stylesheet" href="//highlightjs.org/static/demo/styles/monokai.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=cyrillic,latin' rel='stylesheet' type='text/css'>    
+    <link rel="stylesheet" href="//highlightjs.org/static/demo/styles/atelier-heath.light.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
     <link rel="stylesheet" href="demo.css">
 
+    <link rel="stylesheet" href="jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="jquery.nselect.css">
 </head>
 
 <body>
+    <header class="header">
+        <h1><span>nSelect</span> - jQuery custom select plugin</h1>
+        <div class="btn-wr">
+            <a class="dload-btn" href="https://github.com/edbond88/nselect/archive/master.zip">Download</a>
+        </div>
+    </header>
+
     <div class="container">
 
-        <h1><span>nSelect</span> - jQuery custom select plugin</h1>
+        <section>
+            <h3>Описание</h3>
+            <p>nSelect - это простой плагин для кастоматизации выпадающего списка. Отличие от других подобных плагинов состоит в том, что он не перегружен лишним функционалом. Размер минифицированной версии составляет всего около <strong>3 кб</strong>.</p>
 
-        <section class="select__one">
-            <label>Простой вариант плагина. Если заголовок не задан явно, то берется первый элемент в селекте:</label>
+            <h5>Основные возможности:</h5>
+            <ul>
+                <li>Простота в установке</li>
+                <li>Возможность выхова коллбэков</li>
+                <li>Простая кастомизация тем</li>
+                <li>Работает в формах</li>
+                <li>Поддержка скролла для длинных списков (нужен дополнительный плагин)</li>
+            </ul>
+            <p>Версия плагина 1.0.0</p>
+        </section>        
+
+        <section>
+            <h3>Установка</h3>
+            <p>Для начала нужно <a href="https://github.com/edbond88/nselect/archive/master.zip" target="_blank">скачать архив</a> с плагином, из папки <code>build</code> взять файлы <code>jquery.nselect.min.js</code>, <code>jquery.nselect.css</code> и подключить к вашему проекту.</p>
+
+            <h4>HTML</h4>
+            <p>Файл со стилями подключается в <code>head</code> тэг:</p>
+            <pre><code>&lt;link&nbsp;rel=&quot;stylesheet&quot;&nbsp;href=&quot;jquery.nselect.css&quot;&gt;</code></pre>
+            <p>Сам плагин подключаем перед закрытием тэга <code>body</code>. Для плагина нужна библиотека jQuery > 1.6.0.</p>
+            <pre><code>&lt;script&nbsp;src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js&quot;&gt;&lt;/script&gt;<br/>&lt;script&nbsp;src=&quot;jquery.nselect.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+            <h4>CSS</h4>
+            <p>В css файле вначале определены обязательные стили, без которых список будет некорректно отображаться. Далее следует базовая тема, котороую можно менять по своему усмотрению.</p>
+
+            <h4>Инициализация</h4>
+            <p>Для инициализации нужно вызвать плагин для нужного нам селекта:</p>
             <p>
                 <select class="nselect-1" name="pets">
-                    <option value="1" selected>Cat</option>
-                    <option value="2">Dog</option>
-                    <option value="3">Frog</option>
-                    <option value="4">Duck</option>
-                    <option value="5">Elephant</option>
-                </select>
-            </p>            
-
-<pre><code>&lt;select&nbsp;class=&quot;nselect-1&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
-<pre><code>$('.nselect-1').niceSelect();</code></pre>
-
-        </section>
-
-        <section class="select__one">
-            <label>Селект, который нельзя раскрыть. Добавляем класс _disabled и data-title="Disabled":</label>
-            <p>
-                <select class="nselect-1 _disabled" name="disabled" data-title="Disabled">
                     <option value="1">Cat</option>
                     <option value="2">Dog</option>
                     <option value="3">Frog</option>
                     <option value="4">Duck</option>
                     <option value="5">Elephant</option>
                 </select>
-            </p>
+            </p>  
 
-<pre><code>&lt;select&nbsp;class=&quot;nselect-1&nbsp;_disabled&quot;&nbsp;name=&quot;disabled&quot;&nbsp;data-title=&quot;Disabled&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
-
+            <pre><code>&lt;select&nbsp;class=&quot;nselect-1&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-1').nSelect();</code></pre>
         </section>
         
-        <section class="select__one">
-            <label>Вариант, когда заголовок задается черезе data-title. После выбора эта надпись исчезает:</label>
+        <section>
+            <h3>Конфигурация</h3>
+            <p>Настраивать плагин можно с помощью следующих опций, которые передаются в виде объекта, как параметр в функцию.</p>
+            <p><strong>Пример:</strong> <code>$(selector).nSelect({ option: value });</code></p>
+            
+            <table class="table table-condensed">
+            <thead></thead>
+                <tr><th>Name: default</th><th>Description</th></tr>
+
+                <tbody>
+                    <tr>
+                        <td><code>firstTitle:&nbsp;''</code></td>
+                        <td>Если задано, то будет отображаться как заголовок в списке. Более подробно <a href="#title">тут</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>theme:&nbsp;'nsOrange'</code></td>
+                        <td>Класс темы, который добавляется к обертке.</td>
+                    </tr>
+                    <tr>
+                        <td><code>topList:&nbsp;false</code></td>
+                        <td>Если <code>true</code>, то список выводится сверху. Добавляется класс <code>_top</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>disabled:&nbsp;false</code></td>
+                        <td>Если <code>true</code>, то список становится некликабельным. Добавляется класс <code>_disabled</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>scrollbarTheme: 'dark'</code></td>
+                        <td>Тема для <a href="http://manos.malihu.gr/jquery-custom-content-scroller" target="_blank">кастомного скроллбара</a>, если он используется</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>afterChange: function()&nbsp;{}</code></td>
+                        <td>Коллбэк, вызывается при выборе пункта в списке</td>
+                    </tr>
+                    <tr>
+                        <td><code>afterOpen: function()&nbsp;{}</code></td>
+                        <td>Коллбэк, вызывается при открытии списка</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Также формируются два события: <code>nOpen</code> и <code>nChange</code>, после открытия и выбора пункта списка, соответственно.</p>
+
+            <p><a name="title"></a>Заголовок на кнопке, которая открывает список может быть задан следующим образом:</p>
+            <ol>
+                <li>Установкой атрибута <code>selected</code> у <code>option</code> в селекте</li>
+                <li>Установкой атрибута <code>data-title</code> в селекте</li>
+                <li>Через передачу параметра <code>firstTitle</code> в плагин</li>
+            </ol>
+            <p><strong>Приоритет такой:</strong> 1 > 2 > 3</p>
+            <p>Если заголовок не был задан ни одним из предыдущих способов, то берется первый элемент в селекте.</p>
+            <h4>Примеры:</h4>
+            <p><strong>Заголовок задан через <code>data-title</code></strong></p>
             <p>
-                <select class="nselect-2" name="pets" data-title="Chose your pet">
+                <select class="nselect-1" name="pets" data-title="Chose your pet">
                     <option value="1">Cat</option>
                     <option value="2">Dog</option>
-                    <option value="3">Frog</option>
-                    <option value="4">Duck</option>
-                    <option value="5">Elephant</option>
+                    <option value="3">Duck</option>
                 </select>
-            </p>
+            </p>  
 
-<pre><code>&lt;select&nbsp;class=&quot;nselect-2&quot;&nbsp;name=&quot;pets&quot;&nbsp;data-title=&quot;Chose&nbsp;your&nbsp;pet&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
-<pre><code>$('.nselect-2').niceSelect();</code></pre>
+            <pre><code>&lt;select&nbsp;class=&quot;nselect-1&quot;&nbsp;name=&quot;pets&quot;&nbsp;data-title=&quot;Chose&nbsp;your&nbsp;pet&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Duck&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-1').nSelect();</code></pre>
 
-        </section>
-        
-        <section class="select__one">
-            <label>Список выпадает вверх:</label>
+            <p><strong>Заголовок задан через <code>firstTitle</code> в опциях плагина</strong></p>
             <p>
-                <select class="nselect-3" name="pets">
+                <select class="nselect-1-2" name="pets">
                     <option value="1">Cat</option>
                     <option value="2">Dog</option>
-                    <option value="3">Frog</option>
-                    <option value="4">Duck</option>
-                    <option value="5" selected>Elephant</option>
+                    <option value="3">Duck</option>
                 </select>
-            </p>
+            </p>  
 
-<pre><code>&lt;select&nbsp;class=&quot;nselect-3&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&nbsp;selected&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
+            <pre><code>&lt;select&nbsp;class=&quot;nselect-1-2&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Duck&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-1-2').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;firstTitle&nbsp;:&nbsp;'Chose&nbsp;your&nbsp;pet&nbsp;with&nbsp;javascript'<br/>});</code></pre>
+        </section>  
+              
+        <section>
+            <h3>Кастомный скроллбар для длинных списков</h3>
+            <p>В nSelect можно использовать <a href="http://manos.malihu.gr/jquery-custom-content-scroller" target="_blank">кастомный скроллбар</a></p>
+            <p>Для этого нужно либо скачать файлы с официального сайта, либо вытащить из папки <code>build</code> файлы <code>jquery.mCustomScrollbar.min.js</code>, <code>jquery.mCustomScrollbar.css</code> и подключить в проект.</p>
 
-<pre><code>$('.nselect-3').niceSelect({
-    topList : true
-});</code></pre>
-
-        </section>
-
-        <section class="select__one">
-            <label>Событие при открытии и выборе пункта:</label>
             <p>
-                <select class="nselect-4" name="pets">
-                    <option value="1">Cat</option>
-                    <option value="2">Dog</option>
-                    <option value="3">Frog</option>
-                    <option value="4">Duck</option>
-                    <option value="5">Elephant</option>
+                <select class="nselect-scroll" name="scroll">
+                    <option value="">Chose country</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Afghanistan">Afghanistan</option>
+                    <option value="Aland Islands">Aland Islands</option>
+                    <option value="Albania">Albania</option>
+                    <option value="Algeria">Algeria</option>
+                    <option value="American Samoa">American Samoa</option>
+                    <option value="Andorra">Andorra</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Anguilla">Anguilla</option>
+                    <option value="Antarctica">Antarctica</option>
+                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Armenia">Armenia</option>
+                    <option value="Aruba">Aruba</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Azerbaijan">Azerbaijan</option>
+                    <option value="Bahamas">Bahamas</option>
+                    <option value="Bahrain">Bahrain</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="Barbados">Barbados</option>
+                    <option value="Belarus">Belarus</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Belize">Belize</option>
+                    <option value="Benin">Benin</option>
+                    <option value="Bermuda">Bermuda</option>
+                    <option value="Bhutan">Bhutan</option>
+                    <option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
+                    <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
+                    <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                    <option value="Botswana">Botswana</option>
+                    <option value="Bouvet Island">Bouvet Island</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                    <option value="Brunei Darussalam">Brunei Darussalam</option>
+                    <option value="Bulgaria">Bulgaria</option>
+                    <option value="Burkina Faso">Burkina Faso</option>
+                    <option value="Burundi">Burundi</option>
+                    <option value="Cambodia">Cambodia</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Cape Verde">Cape Verde</option>
+                    <option value="Cayman Islands">Cayman Islands</option>
+                    <option value="Central African Republic">Central African Republic</option>
+                    <option value="Chad">Chad</option>
+                    <option value="Chile">Chile</option>
+                    <option value="China">China</option>
+                    <option value="Christmas Island">Christmas Island</option>
+                    <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Comoros">Comoros</option>
+                    <option value="Congo">Congo</option>
+                    <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+                    <option value="Cook Islands">Cook Islands</option>
+                    <option value="Costa Rica">Costa Rica</option>
+                    <option value="Cote D'ivoire">Cote D'ivoire</option>
+                    <option value="Croatia">Croatia</option>
+                    <option value="Cuba">Cuba</option>
+                    <option value="Curacao">Curacao</option>
+                    <option value="Cyprus">Cyprus</option>
+                    <option value="Czech Republic">Czech Republic</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Dominica">Dominica</option>
+                    <option value="Dominican Republic">Dominican Republic</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="Egypt">Egypt</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                    <option value="Eritrea">Eritrea</option>
+                    <option value="Estonia">Estonia</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                    <option value="Faroe Islands">Faroe Islands</option>
+                    <option value="Fiji">Fiji</option>
+                    <option value="Finland">Finland</option>
+                    <option value="France">France</option>
+                    <option value="French Guiana">French Guiana</option>
+                    <option value="French Polynesia">French Polynesia</option>
+                    <option value="French Southern Territories">French Southern Territories</option>
+                    <option value="Gabon">Gabon</option>
+                    <option value="Gambia">Gambia</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Gibraltar">Gibraltar</option>
+                    <option value="Greece">Greece</option>
+                    <option value="Greenland">Greenland</option>
+                    <option value="Grenada">Grenada</option>
+                    <option value="Guadeloupe">Guadeloupe</option>
+                    <option value="Guam">Guam</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Guernsey">Guernsey</option>
+                    <option value="Guinea">Guinea</option>
+                    <option value="Guinea-bissau">Guinea-bissau</option>
+                    <option value="Guyana">Guyana</option>
+                    <option value="Haiti">Haiti</option>
+                    <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                    <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                    <option value="Honduras">Honduras</option>
+                    <option value="Hong Kong">Hong Kong</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Iceland">Iceland</option>
+                    <option value="India">India</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                    <option value="Iraq">Iraq</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Isle of Man">Isle of Man</option>
+                    <option value="Israel">Israel</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Jamaica">Jamaica</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Jersey">Jersey</option>
+                    <option value="Jordan">Jordan</option>
+                    <option value="Kazakhstan">Kazakhstan</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Kiribati">Kiribati</option>
+                    <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                    <option value="Korea, Republic of">Korea, Republic of</option>
+                    <option value="Kuwait">Kuwait</option>
+                    <option value="Kyrgyzstan">Kyrgyzstan</option>
+                    <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                    <option value="Latvia">Latvia</option>
+                    <option value="Lebanon">Lebanon</option>
+                    <option value="Lesotho">Lesotho</option>
+                    <option value="Liberia">Liberia</option>
+                    <option value="Libya">Libya</option>
+                    <option value="Liechtenstein">Liechtenstein</option>
+                    <option value="Lithuania">Lithuania</option>
+                    <option value="Luxembourg">Luxembourg</option>
+                    <option value="Macao">Macao</option>
+                    <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+                    <option value="Madagascar">Madagascar</option>
+                    <option value="Malawi">Malawi</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Maldives">Maldives</option>
+                    <option value="Mali">Mali</option>
+                    <option value="Malta">Malta</option>
+                    <option value="Marshall Islands">Marshall Islands</option>
+                    <option value="Martinique">Martinique</option>
+                    <option value="Mauritania">Mauritania</option>
+                    <option value="Mauritius">Mauritius</option>
+                    <option value="Mayotte">Mayotte</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                    <option value="Moldova, Republic of">Moldova, Republic of</option>
+                    <option value="Monaco">Monaco</option>
+                    <option value="Mongolia">Mongolia</option>
+                    <option value="Montenegro">Montenegro</option>
+                    <option value="Montserrat">Montserrat</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Mozambique">Mozambique</option>
+                    <option value="Myanmar">Myanmar</option>
+                    <option value="Namibia">Namibia</option>
+                    <option value="Nauru">Nauru</option>
+                    <option value="Nepal">Nepal</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="New Caledonia">New Caledonia</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Niger">Niger</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Niue">Niue</option>
+                    <option value="Norfolk Island">Norfolk Island</option>
+                    <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Oman">Oman</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Palau">Palau</option>
+                    <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                    <option value="Panama">Panama</option>
+                    <option value="Papua New Guinea">Papua New Guinea</option>
+                    <option value="Paraguay">Paraguay</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Pitcairn">Pitcairn</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Puerto Rico">Puerto Rico</option>
+                    <option value="Qatar">Qatar</option>
+                    <option value="Reunion">Reunion</option>
+                    <option value="Romania">Romania</option>
+                    <option value="Russian Federation">Russian Federation</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Saint Barthelemy">Saint Barthelemy</option>
+                    <option value="Saint Helena, Ascension and Tristan da Cunha">Saint Helena, Ascension and Tristan da Cunha</option>
+                    <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                    <option value="Saint Lucia">Saint Lucia</option>
+                    <option value="Saint Martin (French part)">Saint Martin (French part)</option>
+                    <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                    <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                    <option value="Samoa">Samoa</option>
+                    <option value="San Marino">San Marino</option>
+                    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Senegal">Senegal</option>
+                    <option value="Serbia">Serbia</option>
+                    <option value="Seychelles">Seychelles</option>
+                    <option value="Sierra Leone">Sierra Leone</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
+                    <option value="Slovakia">Slovakia</option>
+                    <option value="Slovenia">Slovenia</option>
+                    <option value="Solomon Islands">Solomon Islands</option>
+                    <option value="Somalia">Somalia</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
+                    <option value="South Sudan">South Sudan</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Sri Lanka">Sri Lanka</option>
+                    <option value="Sudan">Sudan</option>
+                    <option value="Suriname">Suriname</option>
+                    <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                    <option value="Swaziland">Swaziland</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                    <option value="Taiwan, Province of China">Taiwan, Province of China</option>
+                    <option value="Tajikistan">Tajikistan</option>
+                    <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="Timor-leste">Timor-leste</option>
+                    <option value="Togo">Togo</option>
+                    <option value="Tokelau">Tokelau</option>
+                    <option value="Tonga">Tonga</option>
+                    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                    <option value="Tunisia">Tunisia</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="Turkmenistan">Turkmenistan</option>
+                    <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                    <option value="Tuvalu">Tuvalu</option>
+                    <option value="Uganda">Uganda</option>
+                    <option value="Ukraine">Ukraine</option>
+                    <option value="United Arab Emirates">United Arab Emirates</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Uzbekistan">Uzbekistan</option>
+                    <option value="Vanuatu">Vanuatu</option>
+                    <option value="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
+                    <option value="Viet Nam">Viet Nam</option>
+                    <option value="Virgin Islands, British">Virgin Islands, British</option>
+                    <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                    <option value="Wallis and Futuna">Wallis and Futuna</option>
+                    <option value="Western Sahara">Western Sahara</option>
+                    <option value="Yemen">Yemen</option>
+                    <option value="Zambia">Zambia</option>
+                    <option value="Zimbabwe">Zimbabwe</option>
                 </select>
             </p>
+        </section>     
 
-<pre><code>$('.nselect-4').niceSelect({
-    afterOpen : function(el){
-        alert('Селект открылся')
-    },
-    afterChange : function(el){
-        alert('Пункт выбран')
-    }
-});</code></pre>
+        <section class="ex-block" role="tabpanel">
+            <h3>Дополнительные примеры</h3>
 
-        </section>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#ex1" aria-controls="ex1" role="tab" data-toggle="tab">Пример 1</a></li>
+                <li role="presentation"><a href="#ex2" aria-controls="ex2" role="tab" data-toggle="tab">Пример 2</a></li>
+                <li role="presentation"><a href="#ex3" aria-controls="ex3" role="tab" data-toggle="tab">Пример 3</a></li>
+            </ul>   
 
-        <section class="select__one">
-            <label>Заголовок задан в скрипте:</label>
-            <p>
-                <select class="nselect-5" name="pets">
-                    <option value="1">Cat</option>
-                    <option value="2">Dog</option>
-                    <option value="3">Frog</option>
-                    <option value="4">Duck</option>
-                    <option value="5">Elephant</option>
-                </select>
-            </p>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="ex1">
+                    <label>Селект, который нельзя раскрыть. Добавляем класс <code>_disabled</code>. <br>Либо через js в опциях ствим <code>disabled: true</code>.</label>
+                    <p>
+                        <select class="nselect-2 _disabled" name="pets_disabled">
+                            <option value="1">Cat</option>
+                            <option value="2">Dog</option>
+                            <option value="3">Frog</option>
+                            <option value="4">Duck</option>
+                            <option value="5">Elephant</option>
+                        </select>
+                    </p>
 
-<pre><code>$('.nselect-5').niceSelect({
-    firstTitle : 'JS first title'
-});</code></pre>
+                    <pre><code>&lt;select&nbsp;class=&quot;nselect-2&nbsp;_disabled&quot;&nbsp;name=&quot;disabled&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;</code></pre>
+                    <p>Или:</p>
+                    <pre><code>$('.nselect-2').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;disabled&nbsp;:&nbsp;true<br/>});</code></pre>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="ex2">
+                    <label>Список выпадает вверх:</label>
+                    <p>
+                        <select class="nselect-3" name="pets">
+                            <option value="1">Cat</option>
+                            <option value="2">Dog</option>
+                            <option value="3">Frog</option>
+                            <option value="4">Duck</option>
+                            <option value="5" selected>Elephant</option>
+                        </select>
+                    </p>
+
+                    <pre><code>&lt;select&nbsp;class=&quot;nselect-3&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&nbsp;selected&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-3').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;topList&nbsp;:&nbsp;true<br/>});</code></pre>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="ex3">
+                    <label>Событие при открытии и выборе пункта:</label>
+                    <p>
+                        <select class="nselect-4" name="pets">
+                            <option value="1">Cat</option>
+                            <option value="2">Dog</option>
+                            <option value="3">Frog</option>
+                            <option value="4">Duck</option>
+                            <option value="5">Elephant</option>
+                        </select>
+                    </p>
+
+                    <pre><code>&lt;select&nbsp;class=&quot;nselect-4&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-4').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterOpen&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x0421;&#x0435;&#x043b;&#x0435;&#x043a;&#x0442;&nbsp;&#x043e;&#x0442;&#x043a;&#x0440;&#x044b;&#x043b;&#x0441;&#x044f;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;},<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterChange&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x041f;&#x0443;&#x043d;&#x043a;&#x0442;&nbsp;&#x0432;&#x044b;&#x0431;&#x0440;&#x0430;&#x043d;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>});</code></pre>
+                </div>
+            </div>  
+        </section>   
+
+        <section>
+            <h3>Требование и поддержка</h3>
+            <p>Для работы плагина нужна библиотека jQuery версии выше 1.6</p>
+            <p>Поддержка браузерами:</p>
+            <ul>
+                <li>Chrome & Mobile Chrome</li>
+                <li>Firefox</li>
+                <li>Opera</li>
+                <li>Internet Explorer > 8</li>
+                <li>Safari & Mobile Safari</li>
+            </ul>
+
+            <p>По вопросам работы плагина пишите на <a href="https://github.com/edbond88/nselect/issues" target="_blank">гитхабе</a>.</p>
+            <p>Сайт разработчика: <a href="http://edbond.name/" target="_blank">http://edbond.name/</a></p>
         </section>
 
     </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <footer class="footer">
+        Ed Bond 2015
+    </footer>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    
+    <script src="jquery.mCustomScrollbar.js"></script>
     <script src="jquery.nselect.js"></script>
     <script>
 
         hljs.initHighlightingOnLoad();
 
-        $('.nselect-1').niceSelect();
+        $('.nselect-1').nSelect();
 
-        
-        $('.nselect-2').niceSelect();
+        $('.nselect-scroll').nSelect();
 
-        $('.nselect-3').niceSelect({
+        $('.nselect-2').nSelect();
+
+        $('.nselect-1-2').nSelect({
+            firstTitle : 'Chose your pet with javascript'
+        });
+
+        $('.nselect-3').nSelect({
             topList : true
         });
 
-        $('.nselect-4').niceSelect({
+        $('.nselect-4').nSelect({
             afterOpen : function(el){
                 alert('Селект открылся')
             },
             afterChange : function(el){
                 alert('Пункт выбран')
             }
-        });
-
-        $('.nselect-5').niceSelect({
-            firstTitle : 'JS first title'
         });
 
     </script>

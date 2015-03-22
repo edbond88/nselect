@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "nSelect",
   "author": "Ed Bond",
-  "license": "ISC",
+  "license": "MIT License (MIT)",
   "devDependencies": {
     "gulp": "^3.8.1",
     "gulp-autoprefixer": "^2.1.0",

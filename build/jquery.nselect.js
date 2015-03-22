@@ -1,90 +1,131 @@
-/* ОЧЕНЬ красивый выпадающий список
-    Параметры:
-    topList : false - если тру то список выпадает вверх
-    firstTitle: '' - если задано, то будет отображаться в заголовке списка
-                       так же у селекта может быть data-title, которая отображается
-                       только в самый первый раз
-    theme: '' - класс добавляемый к обертке
-    scrollbarTheme: 'blue' - тема для кастомного скроллбара
-    afterChange : function() {} - колбеки 
-    afterOpen : function() {} - колбеки
+/*
+== nSelect jQuery custom select plugin == 
+Version: 1.0.0
+Plugin URI: http://nselect.edbond.name/
+Author: Ed Bond
+Author URI: http://edbond.name/
+License: MIT License (MIT)
+*/
 
-    Так же формируются события:
-    niceClose
-    niceOpen
-    niceChange
-    
+/*
+Copyright 2015 Ed Bond (email: edbond88@gmail.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 */
 (function ($) {
-    $.niceSelect = function(elem, opt) {
-        var $this = this
-            ,context = ''
-            ,el = {}
-            ,options = {}
-            ,customScrollFlag = false;
+    $.nSelect = function($element, opt) {
+        var $this = this,
+            customScrollFlag = false,
+            defaults = {
+                topList        : false,
+                firstTitle     : '',
+                theme          : 'nsOrange',
+                disabled       : false,
+                scrollbarTheme : 'dark',
+                afterChange    : function() {},
+                afterOpen      : function() {}
+            },
+            options = $.extend(defaults, opt);
 
-        init(elem, opt);
 
-        function closeSelect() {
-            context.removeClass('_active');
-            $(window).trigger('niceClose');
-        }
+        function init() {
+            var $nSelect = renderSelect($element),
+                el = {
+                    selectBtn : $('.nselect__head', $nSelect),
+                    selectHeadInner : $('.nselect__head SPAN', $nSelect),
+                    selectList : $('.nselect__list', $nSelect),
+                    selectItem : $('.nselect__inner li', $nSelect)
+                }
 
-        function openSelect() {
-            context.addClass('_active');
-            options.afterOpen();
-            $(window).trigger('niceOpen');
-        }
+            el.selectBtn.on('click', selectBtnClick);
+            el.selectItem.on('click', selectItemClick);
 
-        function setNewValue(newVal) {
-            el.hiddenSelect.val(newVal);
-            context.data('val', newVal);
-        }
+            function selectBtnClick() {
+                var $that = $(this);
 
-        function customScrollUpdate(elem) {
-            elem.mCustomScrollbar('destroy');
-            elem.mCustomScrollbar({
-                theme: options.scrollbarTheme
-            });
-            customScrollFlag = true;
+                if ($nSelect.hasClass('_active')) {
+                    closeSelect($that, $nSelect);
+                } else {
+                    openSelect($that, $nSelect);
+                }
+
+                // Активация кастомного скроллбара,
+                // если он установлен
+                if (!customScrollFlag && jQuery.mCustomScrollbar) {
+                    customScrollUpdate(el.selectList);
+                }
+            }
+
+            function selectItemClick() {
+                var $that = $(this);
+
+                changeSelectItem($nSelect, $that);
+                options.afterChange($that);
+                closeSelect($that);
+            }
         }
 
         function renderSelect($elem) {
             var modClass = {
-                'top' : ''
-                ,'disabled' : ''
-            }
-            ,selectedOpt
-            ,noSelected = false
-            ,selectName = $elem.data('title') || '';
+                    'top' : ''
+                    ,'disabled' : ''
+                },
+                context = '',
+                el = {},
+                selectedOpt,
+                noSelected = false,
+                selectTitle = $elem.data('title') || '',
+                selectName = $elem.attr('name') || '',
+                titleHtml,
+                titleVal;
 
             $elem.hide();
 
-            if (options.topList) modClass.top = '_top';
-            if ($elem.hasClass('_disabled')) modClass.disabled = '_disabled';
+            if (options.topList) {
+                modClass.top = '_top';
+            }
+            
+            if ($elem.hasClass('_disabled') || options.disabled) {
+                modClass.disabled = '_disabled';
+            }
 
             // Создаем обертку вокруг селекта
             context = $elem
-                        .wrap('<div class="nice-select '+modClass.top+' '+options.theme+' '+modClass.disabled+'" data-name="'+$elem.attr('name')+'" data-val=""></div>')
-                        .closest('.nice-select')
-                        .prepend('<div class="nice-select__inner js-nice-select__inner">'+
-                                    '<ul class="nice-select-list js-nice-select-list"></ul>'+
+                        .wrap('<div class="nselect '+modClass.top+' '+options.theme+' '+modClass.disabled+'" data-name="'+selectName+'" data-val=""></div>')
+                        .closest('.nselect')
+                        .prepend('<div class="nselect__inner">'+
+                                    '<ul class="nselect__list"></ul>'+
                                 '</div>');
 
             // Первые элементы: внутрянка обертки и список
             el = {
-                'selectInner' : $('.js-nice-select__inner', context)
-                ,'selectList' : $('.js-nice-select-list', context)
-                ,'hiddenSelect' : $elem
+                'selectList' : $('.nselect__list', context),
+                'selectItem' : {}
             }
 
             // Заполняем списков из опшинов
             $elem.find('option').each(function(index) {
-                var $that = $(this)
-                    ,val = $that.val()
-                    ,html = $that.html()
-                    ,activeClass = ''
-                    ,newItem;
+                var $that = $(this),
+                    val = $that.val(),
+                    html = $that.html(),
+                    activeClass = '',
+                    newItem;
 
                 // Если есть selected то добавляем активный класс к li
                 // и записываем этот опшин в переменную для дальнейших действий
@@ -99,122 +140,111 @@
 
                 el.selectList.append(newItem)
             });
-            el.selectItem = $('.js-nice-select__inner li', context)
+            el.selectItem = $('.nselect__inner li', context)
 
-            // Если не было у опшинов selected то добавляем активный класс к
-            // первому li
+            // Если юзер не задал явно selected для опшинов,
+            // то делаем первый элемент "выбранным" в списке
             if (selectedOpt === undefined) {
+                console.log('auto first title')
                 noSelected = true;
                 selectedOpt = $elem.find('option');
                 el.selectItem.eq(0).addClass('_active');
             }
 
             // Делаем кнопку с выбранным элементом из списка
-            var titleHtml = selectedOpt.html()
-                titleVal = selectedOpt.val();
+            titleHtml = selectedOpt.html();
+            titleVal = selectedOpt.val();
 
-            // Если заголовок не пункт селекта, а заданный пользователем,
-            // то показываем все li
+            // Выводим заголовок в кнопку из options.firstTitle
             if (options.firstTitle !== '' && noSelected) {
+                console.log('options.firstTitle')
+
                 el.selectItem.removeClass('_active');
+                $elem.val('');
                 titleHtml = options.firstTitle;
                 titleVal = '';
             } 
 
-            // Если задано ПЕРВЫЙ тайтл для селекта
-            if (selectName !== '') {
+            // Выводим заголовок в кнопку из data-title
+            if (selectTitle !== '' && noSelected) {
+                console.log('data-title');
+
                 el.selectItem.removeClass('_active');
-                titleHtml = selectName;
+                $elem.val('');
+                titleHtml = selectTitle;
                 titleVal = '';
             }
 
-            context.prepend('<h6 class="nice-select-head js-nice-head" data-val="'+titleVal+'"><span>'+titleHtml+'</span></h6>')
-            el.selectBtn = $('.js-nice-head', context);
-            el.selectBtn.attr('title', $('.js-nice-head SPAN', context).html())
-            el.selectHeadInner = $('.js-nice-head SPAN', context);
+            context.prepend('<h6 class="nselect__head" data-val="'+titleVal+'"><span>'+titleHtml+'</span></h6>');
+
+            $('.nselect__head', context)
+                .attr('title', $('.nselect__head SPAN', context).html())
+
+            return context;
         }
 
-        function init($element, opt) {
-            var defaults = {
-                'topList' : false
-                ,'firstTitle': ''
-                ,'theme': ''
-                ,'scrollbarTheme': 'blue'
-                ,'afterChange' : function() {}
-                ,'afterOpen' : function() {}
-            };
-
-            options = $.extend(defaults, opt);
-
-            renderSelect($element);
-
-            el.selectBtn.on('click', selectBtnClick);
-            el.selectItem.on('click', selectItemClick);
-
-            //TODO: доделать баг с событием на закрытие
-            $(document).on('click', function(event){
-                var $et = $(event.target);
-                if (!$et.closest(context).length && $('.nice-select._active').length) {
-                    closeSelect();
-                }
-            });
-
-            function selectBtnClick(e) {
-                var $that = $(this);
-
-                if (context.hasClass('_active')) {
-                    closeSelect();
-                } else {
-                    openSelect();
-                }
-
-                if (!customScrollFlag && jQuery.mCustomScrollbar) {
-                    customScrollUpdate(el.selectList);
-                }
+        function closeSelect(el, ctx) {
+            if (ctx === undefined) {
+                $('.nselect').removeClass('_active');
+                return;
             }
 
-            function selectItemClick() {
-                var $that = $(this)
-                    ,ctx = $that.closest('.js-nice-select')
-                    ,innerItem = $that.find('span').html()
-                    ,newVal = $that.data('val')
-
-                // if ($that.hasClass('_active')) return;
-
-                $that.addClass('_active').siblings('li').removeClass('_active');
-
-
-                // if (options.firstTitle == '' && $that.index() == 0) {
-                //     context.removeClass('_checked');
-                // } else {
-                //     context.addClass('_checked');
-                // }
-
-                context.addClass('_checked');
-
-                el.selectBtn.attr('title', innerItem)
-                el.selectHeadInner.html(innerItem);
-                setNewValue(newVal);
-
-                options.afterChange($that);
-
-                $(window).trigger('niceChange');
-
-                closeSelect();
-            }   
-
+            ctx.removeClass('_active');
+            $(window).trigger('niceClose');
         }
 
-        $this.closeSelect = function() {
-            closeSelect();
+        function openSelect(el, ctx) {
+            ctx.addClass('_active');
+            options.afterOpen(el);
+            $(window).trigger('nOpen');
         }
 
+        function setNewValue(newVal, ctx) {
+            $element.val(newVal);
+            ctx.data('val', newVal);
+        }
+
+        function changeSelectItem(ctx, item) {
+            var $that = $(item),
+                innerItem = $that.find('span').html(),
+                newVal = $that.data('val');
+
+            $that.addClass('_active').siblings('li').removeClass('_active');
+            
+            ctx.addClass('_checked');
+
+            $('.nselect__head', ctx).attr('title', innerItem)
+            $('.nselect__head SPAN', ctx).html(innerItem);
+            setNewValue(newVal, ctx);
+
+            $(window).trigger('nChange');
+        }
+
+        function customScrollUpdate(el) {
+            el.mCustomScrollbar('destroy');
+            el.mCustomScrollbar({
+                theme: options.scrollbarTheme
+            });
+            customScrollFlag = true;
+        }
+
+        init();
+
+        // console.log($this)
         return $this;
     };
 
-    $.fn.niceSelect = function(options){
+    //TODO: оформить как-то нормально
+    $(document).on('click', function(e){
+        if (!$(e.target).closest('.nselect').length && $('.nselect._active').length != 0) {
+            $('.nselect').removeClass('_active');
+        }
+    });
+
+
+    $.fn.nSelect = function(options){
         return this.each(function(){
-            var np = new $.niceSelect($(this), options);
+            var np = new $.nSelect($(this), options);
         });
     };
 

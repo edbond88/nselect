@@ -1,2 +1,4 @@
 node_modules
 sftp-config.json
+index.php
+.htaccess

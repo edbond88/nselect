@@ -1,11 +1,15 @@
+$tFast: .15s
+$tLong: .3s
+
+$cBlue: #afceff
+$cOrange: #f2a621
+
 // Выпадающий список в селекте
-.nice-select
-    color: #fff
+.nselect
     position: relative
     box-sizing: border-box
     display: inline-block 
     vertical-align: middle 
-    font-size: 14px 
     
     &:after
         width: 100%
@@ -17,24 +21,89 @@
         display: none      
      
     &._active
-        .nice-select-head
-            border-color: transparent  
+        .nselect__inner
+            opacity: 1
+            visibility: visible  
+    
+    &._top
+        .nselect__inner
+            top: inherit
+            bottom: 45px
+
+    &._disabled
+        &:after
+            display: block
+             
+        .nselect__head
+            cursor: default
+
+    .nselect__head
+        margin: 0 
+        font-weight: normal 
+        cursor: pointer
+        position: relative
+        display: inline-block 
+        box-sizing: border-box 
+        overflow: hidden 
+        user-select: none
+        
+        SPAN
+            display: block
+            overflow: hidden 
             
-            HTML.no-csstransforms &:after
-                // +ps(pin-up)
+    .nselect__inner
+        position: absolute 
+        top: 45px
+        left: 0
+        width: 190px
+        max-height: 330px
+        z-index: 15  
+        box-sizing: border-box  
+        margin: 0
+        opacity: 0
+        visibility: hidden  
+        will-change: transform, opacity, visibility
+
+    .nselect__list
+        max-height: 280px
+        overflow: hidden
+        margin: 0 
+        
+        LI
+            padding: 0 
+            margin: 0 
+            list-style: none
+            
+            &._active
+                display: none 
+                
+            SPAN
+                display: block  
+                cursor: pointer
+                    
+// Orange theme
+.nselect.nsOrange
+    color: #fff
+    font-size: 14px 
+     
+    &._active
+        .nselect__head
+            border-color: transparent  
                 
             &:after
                 transform: rotate(180deg)
-            
-        .nice-select__inner
-            display: block
-
+                
+        .nselect__inner
+            opacity: 1
+            visibility: visible  
+            transform: translateY(0)
     
     &._top
-        .nice-select__inner
+        .nselect__inner
             top: inherit
-            bottom: 40px
+            bottom: 45px
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2)
+            transform: translateY(10px)
             
             &:before
                 top: inherit
@@ -43,46 +112,27 @@
                 border-color: #ffffff transparent transparent transparent
 
     &._disabled
-        &:after
-            display: block
-             
-        .nice-select-head
-            cursor: default
+        .nselect__head
             color: #909090 
             background: #E6E6E6 
             
             &:after
                 border-color: #909090 transparent transparent transparent
 
-            &:before
-                opacity: 0 
-                
-                HTML.lt-ie9 &
-                    display: none
-
     &._checked
-        .nice-select-head
-            background: #f2a621
+        .nselect__head
+            background: $cOrange
             color: #fff
             
             &:after
                 border-color: #fff transparent transparent transparent
 
-    .nice-select-head
+    .nselect__head
         font-size: 14px 
-        margin: 0 
-        font-weight: normal 
-        cursor: pointer
-        position: relative
-        display: inline-block 
-        background: #AFCEFF
+        background: $cBlue
         border-radius: 2px
-        box-sizing: border-box 
         padding: 7px 24px 7px 11px
-        overflow: hidden 
         color: #000
-        user-select: none
-        transition: width .3s
         
         &:after
             right: 10px
@@ -94,16 +144,9 @@
             border-style: solid
             border-width: 4px 3px 0 3px
             border-color: #000 transparent transparent transparent
+            transition: transform $tFast
         
-        SPAN
-            display: block
-            overflow: hidden 
-            
-            B
-                font-weight: normal
-            
-    .nice-select__inner
-        position: absolute 
+    .nselect__inner
         text-align: left 
         top: 45px
         left: 0
@@ -114,11 +157,11 @@
         background: #fff
         margin: 0
         box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.2)
-        display: none
         border-radius: 3px 
-        
-        HTML.lt-ie9 &
-            border: 1px solid #ccc
+        transform: translateY(-10px)
+        opacity: 0
+        visibility: hidden  
+        transition: opacity $tLong, visibility $tLong, transform $tLong
         
         &:before
             content: ''
@@ -131,10 +174,9 @@
             border-width: 0 6px 6px 6px
             border-color: transparent transparent #ffffff transparent
         
-    .nice-select-list
+    .nselect__list
         max-height: 280px
         overflow: hidden
-        margin: 0 
         padding: 10px 0
         
         LI
@@ -142,26 +184,18 @@
             margin: 0 
             list-style: none
             
-            &:before
-                display: none 
-
             &._active
                 display: none 
                 
                 SPAN
                     color: blue
                              
-            &._visible
-                display: block  
-            
             &:last-child
                 SPAN
                     border-color: transparent 
 
             SPAN
                 padding: 7px 20px
-                display: block  
-                cursor: pointer
                 color: #000
                 border-bottom: 1px solid #f4f4f4
                 
