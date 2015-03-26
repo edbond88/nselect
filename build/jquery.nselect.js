@@ -1,6 +1,6 @@
-/*
+/*!
 == nSelect jQuery custom select plugin == 
-Version: 1.0.0
+Version: 1.0.1
 Plugin URI: http://nselect.edbond.name/
 Author: Ed Bond
 Author URI: http://edbond.name/
@@ -48,8 +48,7 @@ Copyright 2015 Ed Bond (email: edbond88@gmail.com)
                     openSelect($that, $nSelect);
                 }
 
-                // Активация кастомного скроллбара,
-                // если он установлен
+                // Custom scrollbar activation
                 if (!customScrollFlag && jQuery.mCustomScrollbar) {
                     customScrollUpdate(el.selectList);
                 }
@@ -88,21 +87,19 @@ Copyright 2015 Ed Bond (email: edbond88@gmail.com)
                 modClass.disabled = '_disabled';
             }
 
-            // Создаем обертку вокруг селекта
+            // Create wrap around select
             context = $elem
-                        .wrap('<div class="nselect '+modClass.top+' '+options.theme+' '+modClass.disabled+'" data-name="'+selectName+'" data-val=""></div>')
-                        .closest('.nselect')
+                        .wrap('<div class="nselect ns-sys '+modClass.top+' '+options.theme+' '+modClass.disabled+'" data-name="'+selectName+'" data-val=""></div>')
+                        .closest('.nselect.ns-sys')
                         .prepend('<div class="nselect__inner">'+
                                     '<ul class="nselect__list"></ul>'+
                                 '</div>');
 
-            // Первые элементы: внутрянка обертки и список
             el = {
                 'selectList' : $('.nselect__list', context),
                 'selectItem' : {}
             }
 
-            // Заполняем списков из опшинов
             $elem.find('option').each(function(index) {
                 var $that = $(this),
                     val = $that.val(),
@@ -111,8 +108,6 @@ Copyright 2015 Ed Bond (email: edbond88@gmail.com)
                     hideClass = '',
                     newItem;
 
-                // Если есть selected то добавляем активный класс к li
-                // и записываем этот опшин в переменную для дальнейших действий
                 if ($that.attr('selected')) {
                     selectedOpt = $that;
                     activeClass = '_active';
@@ -132,10 +127,8 @@ Copyright 2015 Ed Bond (email: edbond88@gmail.com)
             });
             el.selectItem = $('.nselect__inner li', context)
 
-            // Если юзер не задал явно selected для опшинов,
-            // то делаем первый элемент "выбранным" в списке
             if (selectedOpt === undefined) {
-                console.log('auto first title')
+                // console.log('auto first title')
                 noSelected = true;
                 selectedOpt = $elem.find('option');
                 el.selectItem.eq(0).addClass('_active');
@@ -144,24 +137,19 @@ Copyright 2015 Ed Bond (email: edbond88@gmail.com)
                 }
             }
 
-            // Делаем кнопку с выбранным элементом из списка
             titleHtml = selectedOpt.html();
             titleVal = selectedOpt.val();
 
-            // Выводим заголовок в кнопку из options.firstTitle
             if (options.firstTitle !== '' && noSelected) {
-                console.log('options.firstTitle')
-
+                // console.log('options.firstTitle')
                 el.selectItem.removeClass('_active');
                 $elem.val('');
                 titleHtml = options.firstTitle;
                 titleVal = '';
             } 
 
-            // Выводим заголовок в кнопку из data-title
             if (selectTitle !== '' && noSelected) {
-                console.log('data-title');
-
+                // console.log('data-title');
                 el.selectItem.removeClass('_active');
                 $elem.val('');
                 titleHtml = selectTitle;
@@ -227,11 +215,10 @@ Copyright 2015 Ed Bond (email: edbond88@gmail.com)
 
         init();
 
-        // console.log($this)
         return $this;
     };
 
-    //TODO: оформить как-то нормально
+    //TODO: refract this block
     $(document).on('click', function(e){
         if (!$(e.target).closest('.nselect').length && $('.nselect._active').length != 0) {
             $('.nselect').removeClass('_active');

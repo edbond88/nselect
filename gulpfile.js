@@ -46,7 +46,9 @@ gulp.task('js:build', function () {
         .pipe(rename(function (pth) {
             pth.basename += ".min";
         }))
-        .pipe(uglify())
+        .pipe(uglify({
+            preserveComments: 'some'
+        }))
         .pipe(gulp.dest(path.build.all))
         .pipe(connect.reload());
 });
