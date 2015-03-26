@@ -104,6 +104,7 @@
     background: #afceff;
     border-radius: 2px;
     padding: 7px 24px 7px 11px;
+    height: 31px;
     color: #000; }
     .nselect.nsOrange .nselect__head:after {
       right: 10px;

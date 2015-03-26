@@ -44,6 +44,7 @@
                 <li>Поддержка скролла для длинных списков (нужен дополнительный плагин)</li>
             </ul>
             <p>Версия плагина 1.0.1</p>
+            <p>Ссылка на гитхаб: <a href="https://github.com/edbond88/nselect" target="_blank">https://github.com/edbond88/nselect</a></p>
         </section>        
 
         <section>
@@ -483,11 +484,11 @@
                             <option value="2">Dog</option>
                             <option value="3">Frog</option>
                             <option value="4">Duck</option>
-                            <option value="5" selected>Elephant</option>
+                            <option value="5">Elephant</option>
                         </select>
                     </p>
 
-                    <pre><code>&lt;select&nbsp;class=&quot;nselect-4&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-4').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterOpen&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x0421;&#x0435;&#x043b;&#x0435;&#x043a;&#x0442;&nbsp;&#x043e;&#x0442;&#x043a;&#x0440;&#x044b;&#x043b;&#x0441;&#x044f;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;},<br/>&nbsp;&nbsp;&nbsp;&nbsp;afterChange&nbsp;:&nbsp;function(el){<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('&#x041f;&#x0443;&#x043d;&#x043a;&#x0442;&nbsp;&#x0432;&#x044b;&#x0431;&#x0440;&#x0430;&#x043d;')<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>});</code></pre>
+                    <pre><code>&lt;select&nbsp;class=&quot;nselect-5&quot;&nbsp;name=&quot;pets&quot;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;1&quot;&gt;Cat&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;2&quot;&gt;Dog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;3&quot;&gt;Frog&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;4&quot;&gt;Duck&lt;/option&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&nbsp;value=&quot;5&quot;&gt;Elephant&lt;/option&gt;<br/>&lt;/select&gt;<br><br>$('.nselect-5').nSelect({<br/>&nbsp;&nbsp;&nbsp;&nbsp;hideAfterSelect&nbsp;:&nbsp;true<br/>});</code></pre>
                 </div>
             </div>  
         </section>   
@@ -525,6 +526,8 @@
         hljs.initHighlightingOnLoad();
 
         $('.nselect-1').nSelect();
+
+        // $('.nselect-test').nSelect();
 
         $('.nselect-scroll').nSelect();
 
