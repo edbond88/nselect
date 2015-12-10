@@ -21,7 +21,7 @@
   },
   "keywords": [
     "select",
-    "custom select",
+    "nselect"
   ],
   "license": "MIT",
   "ignore": [
