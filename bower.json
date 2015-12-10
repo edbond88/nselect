@@ -1,0 +1,35 @@
+{
+  "name": "nselect",
+  "version": "1.0.1",
+  "homepage": "http://nselect.edbond.name/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/edbond88/nselect"
+  },
+  "authors": [
+    { "name": "Ed Bond", "email": "edbond88@gmail.com" }
+  ],
+  "description": "Simple plugin for customizing select",
+  "main": [
+    "/build/jquery.nselect.min.js",
+    "/build/jquery.nselect.css",
+    "/build/jquery.mCustomScrollbar.min.js",
+    "/build/jquery.mCustomScrollbar.css"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  },
+  "keywords": [
+    "select",
+    "custom select",
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ]
+}

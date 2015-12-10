@@ -9,7 +9,7 @@
   Google+: goo.gl/XxlRb 
 
 /* SITE */
-  Last update: 2015/03
+  Last update: 2015/12
   Language: Russian / English
   Doctype: HTML5
   IDE: Sublime Text 3, Photoshop
