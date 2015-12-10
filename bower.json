@@ -11,10 +11,10 @@
   ],
   "description": "Simple plugin for customizing select",
   "main": [
-    "/build/jquery.nselect.min.js",
-    "/build/jquery.nselect.css",
-    "/build/jquery.mCustomScrollbar.min.js",
-    "/build/jquery.mCustomScrollbar.css"
+    "build/jquery.nselect.min.js",
+    "build/jquery.nselect.css",
+    "build/jquery.mCustomScrollbar.min.js",
+    "build/jquery.mCustomScrollbar.css"
   ],
   "dependencies": {
     "jquery": "~2.1.4"
