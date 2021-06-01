@@ -76,5 +76,3 @@ $(selector).nSelect({ option: value });
 * Opera
 * Internet Explorer > 8
 * Safari & Mobile Safari
- 
- Сайт разработчика: [http://edbond.name/](http://edbond.name/)
